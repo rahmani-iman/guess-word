@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Game = () => {
   const [currentWord, setCurrentWord] = useState("Pangolin");
@@ -46,7 +46,12 @@ const Game = () => {
 
           if (userAnswer === "yes") {
             // System wins
-            alert(`Yay! I guessed it. The word is ${currentWord}. 🎉`);
+            const currentIndex = words.findIndex(
+              (word) => word.explanation === words[i].explanation
+            );
+            const relatedWord =
+              currentIndex !== -1 ? words[currentIndex].word : "";
+            alert(`Yay! I guessed it. The word is ${relatedWord}. 🎉`);
             break;
           } else if (i === 0) {
             // Reached the first word, create a new word
@@ -88,7 +93,7 @@ const Game = () => {
   return (
     <div>
       <h1>Guess the Word!</h1>
-      <p>Click on YES or ASK</p>
+      <p>Click on YES or ASK or RESET</p>
       {words.length === 1 && (
         <h4>Is the word in your mind {words[0].explanation}?</h4>
       )}
